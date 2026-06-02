@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Pedagogy Portfolio — MD Mamun Uddin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1F3A;--navy2:#122948;--blue:#1A56DB;
+  --teal:#0D9488;--teal2:#14B8A6;
+  --gold:#D97706;--gold2:#FCD34D;
+  --cream:#F8F9FA;--white:#fff;
+  --text:#1A1A2E;--mid:#4A5568;--light:#718096;
+  --border:#E2E8F0;
+  --sh:0 4px 20px rgba(11,31,58,.10);
+  --sh2:0 12px 48px rgba(11,31,58,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.7}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--navy);height:62px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;box-shadow:0 2px 20px rgba(0,0,0,.35)}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;white-space:nowrap;margin-right:.5rem;flex-shrink:0}
+.nav-brand span{color:var(--teal2)}
+.nav-items{display:flex;align-items:center;gap:2px;list-style:none}
+.nav-items li{position:relative}
+.nav-items li>a,.nav-items li>button{display:flex;align-items:center;gap:4px;padding:6px 11px;border-radius:6px;color:rgba(255,255,255,.82);font-size:.82rem;font-weight:500;text-decoration:none;border:none;background:none;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;transition:background .15s,color .15s}
+.nav-items li>a:hover,.nav-items li>button:hover{background:rgba(255,255,255,.13);color:#fff}
+.nav-items li>button svg{width:11px;height:11px;transition:transform .2s;flex-shrink:0}
+.nav-items li>button.open svg{transform:rotate(180deg)}
+.drop{position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:var(--sh2);min-width:220px;overflow:hidden;display:none;z-index:99999}
+.drop.open{display:block;animation:fadeDown .18s ease}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.drop a{display:block;padding:9px 14px;color:var(--text);text-decoration:none;font-size:.82rem;font-weight:500;border-bottom:1px solid var(--border);transition:background .12s,padding-left .12s}
+.drop a:last-child{border-bottom:none}
+.drop a:hover{background:var(--navy);color:#fff;padding-left:18px}
+
+.page{display:none !important;min-height:100vh;padding-top:62px;animation:pageIn .4s ease}
+.page.active{display:block !important}
+@keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* HOME */
+#home{padding-top:0 !important}
+.hero-wrap{min-height:100vh;padding-top:62px;background:linear-gradient(135deg,#0B1F3A 0%,#1a3a6b 55%,#0d2d4a 100%);display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:56px 56px}
+.hero-glow1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.2) 0%,transparent 70%);top:-80px;right:-80px}
+.hero-glow2{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(26,86,219,.18) 0%,transparent 70%);bottom:20px;left:8%}
+.hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(13,148,136,.2);border:1px solid rgba(13,148,136,.4);color:var(--teal2);padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero-dot{width:6px;height:6px;background:var(--teal2);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.8vw,3.2rem);color:#fff;line-height:1.12;font-weight:900;margin-bottom:1.1rem}
+.hero-h1 em{font-style:normal;background:linear-gradient(135deg,var(--teal2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-p{color:rgba(255,255,255,.68);font-size:1rem;margin-bottom:1.8rem;font-weight:300}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;padding:11px 22px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;box-shadow:0 4px 16px rgba(13,148,136,.4);transition:all .2s}
+.hero-btn:hover{background:var(--teal2);transform:translateY(-2px)}
+.info-cards{display:flex;flex-direction:column;gap:.85rem}
+.info-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:10px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;transition:all .2s}
+.info-card:hover{background:rgba(255,255,255,.12);border-color:rgba(13,148,136,.4);transform:translateX(4px)}
+.ic-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.ic-icon.t{background:rgba(13,148,136,.25)}.ic-icon.b{background:rgba(26,86,219,.25)}.ic-icon.g{background:rgba(217,119,6,.25)}
+.ic-strong{display:block;color:#fff;font-size:.88rem;font-weight:600}
+.ic-sub{color:rgba(255,255,255,.52);font-size:.77rem}
+
+.page-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:3rem 2rem 2.5rem}
+.pg-wrap{max-width:1100px;margin:0 auto;padding:0 1rem}
+.pg-tag{display:inline-block;background:rgba(13,148,136,.22);color:var(--teal2);padding:3px 11px;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.pg-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);color:#fff;font-weight:900;line-height:1.2}
+.pg-sub{color:rgba(255,255,255,.6);font-size:.92rem;margin-top:.5rem;max-width:660px;font-weight:300}
+
+.tool-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:2.5rem 2rem 2rem}
+.t-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(13,148,136,.2);border:1px solid rgba(13,148,136,.35);color:var(--teal2);padding:3px 11px;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem}
+.t-name{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.4rem);color:#fff;font-weight:900}
+.t-url{display:inline-flex;align-items:center;gap:5px;margin-top:.5rem;color:rgba(255,255,255,.48);font-size:.8rem;font-family:'DM Mono',monospace;text-decoration:none;transition:color .2s}
+.t-url:hover{color:var(--teal2)}
+.t-btn{display:inline-flex;align-items:center;gap:5px;margin-top:1rem;background:var(--teal);color:#fff;padding:9px 18px;border-radius:7px;text-decoration:none;font-size:.82rem;font-weight:600;box-shadow:0 4px 12px rgba(13,148,136,.35);transition:all .2s}
+.t-btn:hover{background:var(--teal2);transform:translateY(-2px)}
+
+.wrap{max-width:1100px;margin:0 auto;padding:2.5rem 2rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.i-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:1.8rem;animation:fadeUp .4s ease}
+.i-cell{background:#fff;padding:1rem 1.2rem}
+.i-cell label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:.3rem}
+.i-cell p{font-size:.88rem;color:var(--text);line-height:1.5;font-weight:500}
+.full-col{grid-column:1/-1}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid var(--border);border-radius:11px;overflow:hidden;box-shadow:var(--sh);animation:fadeUp .4s ease .1s;animation-fill-mode:both}
+.ch{padding:.9rem 1.2rem;display:flex;align-items:center;gap:7px}
+.ch.s{background:#ECFDF5}.ch.s h3{color:#065F46}
+.ch.l{background:#FFF7ED}.ch.l h3{color:#92400E}
+.ch h3{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.cdot{width:7px;height:7px;border-radius:50%}
+.cdot.g{background:#10B981}.cdot.o{background:#F59E0B}
+.cb{padding:1.1rem 1.2rem}
+.cb ul{list-style:none}
+.cb ul li{padding:.42rem 0 .42rem 1.1rem;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--mid);line-height:1.55;position:relative}
+.cb ul li:last-child{border-bottom:none}
+.cb ul li::before{content:'→';position:absolute;left:0;font-size:.72rem;color:var(--teal);top:.5rem}
+
+.eth-card{background:#fff;border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:1.4rem;box-shadow:var(--sh)}
+.eth-h{background:#EFF6FF;padding:.9rem 1.2rem;display:flex;align-items:center;gap:7px}
+.eth-h h3{color:#1E40AF;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.eth-b{padding:1.2rem;font-size:.88rem;color:var(--mid);line-height:1.75}
+
+.apst{background:linear-gradient(135deg,#FFF8E1,#FFFBEB);border:1px solid #FCD34D;border-left:4px solid var(--gold);border-radius:11px;padding:1.4rem;margin-bottom:1.4rem}
+.apst-lbl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem;display:flex;align-items:center;gap:5px}
+.apst p{font-size:.88rem;color:#78350F;line-height:1.75}
+
+.refs{background:var(--cream);border:1px solid var(--border);border-radius:11px;padding:1.3rem;margin-bottom:2rem}
+.refs-lbl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:.8rem}
+.refs p{font-size:.78rem;color:var(--mid);line-height:1.7;margin-bottom:.5rem;font-family:'DM Mono',monospace}
+.refs a{color:var(--blue);word-break:break-all}
+
+/* OVERVIEW */
+.ov-intro{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.8rem;margin-bottom:2rem;font-size:.94rem;color:var(--mid);line-height:1.85;box-shadow:var(--sh);animation:fadeUp .5s ease}
+.tool-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
+.tg-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1rem;text-align:center;cursor:pointer;text-decoration:none;transition:all .22s;animation:fadeUp .5s ease;animation-fill-mode:both}
+.tg-card:hover{border-color:var(--teal);background:#F0FDFA;transform:translateY(-3px);box-shadow:var(--sh)}
+.tg-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--navy);display:block;margin-bottom:.3rem}
+.tg-name{font-size:.77rem;font-weight:600;color:var(--mid)}
+
+/* RANKING */
+.rank-tbl{width:100%;border-collapse:collapse;border-radius:11px;overflow:hidden;box-shadow:var(--sh);margin-bottom:2rem}
+.rank-tbl thead tr{background:var(--navy)}
+.rank-tbl thead th{padding:.9rem 1.1rem;color:rgba(255,255,255,.72);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:left}
+.rank-tbl tbody tr{background:#fff;border-bottom:1px solid var(--border);transition:background .15s}
+.rank-tbl tbody tr:hover{background:#F0F9FF}
+.rank-tbl tbody td{padding:.95rem 1.1rem;font-size:.86rem;color:var(--mid);vertical-align:top}
+.rb{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;font-weight:700;font-size:.88rem;color:#fff}
+.r12{background:#0B1F3A}.r34{background:#1A56DB}.r567{background:#0D9488}.r8910{background:#64748B}
+.sc{display:inline-block;background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0;padding:2px 8px;border-radius:100px;font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace}
+.tn{font-weight:600;color:var(--navy);font-size:.86rem}
+
+/* PART B */
+.meta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.mc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem;text-align:center}
+.mc .mi{font-size:1.4rem;margin-bottom:.4rem}
+.mc .ml{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light)}
+.mc .mv{font-size:.86rem;font-weight:600;color:var(--text);margin-top:.2rem}
+.steps{display:flex;flex-direction:column;gap:.9rem;margin-bottom:2rem}
+.step{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.3rem;display:flex;gap:1.1rem;box-shadow:var(--sh);animation:fadeUp .4s ease;animation-fill-mode:both}
+.sn{width:34px;height:34px;background:var(--navy);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;flex-shrink:0}
+.sc2 h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.sc2 p{font-size:.86rem;color:var(--mid);line-height:1.6}
+.diff-g{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.dc{border-radius:10px;padding:1.2rem;border:1px solid transparent}
+.dc.f{background:#EFF6FF;border-color:#BFDBFE}.dc.f h4{color:#1D4ED8}
+.dc.c{background:#F0FDF4;border-color:#BBF7D0}.dc.c h4{color:#15803D}
+.dc.e{background:#FFF7ED;border-color:#FED7AA}.dc.e h4{color:#C2410C}
+.dc.d{background:#FAF5FF;border-color:#E9D5FF}.dc.d h4{color:#7E22CE}
+.dc h4{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.55rem}
+.dc p{font-size:.84rem;color:var(--mid);line-height:1.6}
+.scholar{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:12px;padding:1.5rem;margin-bottom:2rem;position:relative;overflow:hidden}
+.scholar::before{content:'"';position:absolute;top:-20px;right:16px;font-family:'Playfair Display',serif;font-size:7rem;color:rgba(255,255,255,.05);line-height:1}
+.scholar-lbl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);margin-bottom:.65rem}
+.scholar p{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.75}
+.scholar a{color:var(--teal2)}
+
+/* CONCLUSION */
+.conclusion-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow:var(--sh);border-left:4px solid var(--teal);font-size:.95rem;color:var(--mid);line-height:1.9}
+
+/* REFS PAGE */
+.ref-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;margin-bottom:.8rem;font-size:.83rem;color:var(--mid);line-height:1.75;font-family:'DM Mono',monospace;border-left:3px solid var(--navy)}
+.ref-item a{color:var(--blue);word-break:break-all}
+
+footer{background:var(--navy);color:rgba(255,255,255,.48);text-align:center;padding:1.8rem 2rem;font-size:.8rem}
+footer strong{color:rgba(255,255,255,.82)}
+
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr}.info-cards{display:none}
+  .two-col{grid-template-columns:1fr}.i-grid{grid-template-columns:1fr}
+  .tool-grid{grid-template-columns:repeat(2,1fr)}.meta-row{grid-template-columns:1fr}
+  .diff-g{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Mamun <span>Portfolio</span></div>
+  <ul class="nav-items">
+    <li><a href="#" onclick="go('home');return false">Home</a></li>
+    <li>
+      <button id="ba" onclick="td('da','ba');return false">Part A — Tools
+        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <div class="drop" id="da">
+        <a href="#" onclick="go('ov');cd();return false">Part A Overview</a>
+        <a href="#" onclick="go('t1');cd();return false">Tool 1 — GeoGebra</a>
+        <a href="#" onclick="go('t2');cd();return false">Tool 2 — Desmos</a>
+        <a href="#" onclick="go('t3');cd();return false">Tool 3 — Kahoot!</a>
+        <a href="#" onclick="go('t4');cd();return false">Tool 4 — Padlet</a>
+        <a href="#" onclick="go('t5');cd();return false">Tool 5 — Nearpod</a>
+        <a href="#" onclick="go('t6');cd();return false">Tool 6 — Wolfram Alpha</a>
+        <a href="#" onclick="go('t7');cd();return false">Tool 7 — Canva</a>
+        <a href="#" onclick="go('t8');cd();return false">Tool 8 — Khan Academy</a>
+        <a href="#" onclick="go('t9');cd();return false">Tool 9 — Quizizz</a>
+        <a href="#" onclick="go('t10');cd();return false">Tool 10 — Google Classroom</a>
+      </div>
+    </li>
+    <li><a href="#" onclick="go('ranking');return false">Ranking</a></li>
+    <li>
+      <button id="bb" onclick="td('db','bb');return false">Part B — Activities
+        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <div class="drop" id="db">
+        <a href="#" onclick="go('b1');cd();return false">GeoGebra Activity</a>
+        <a href="#" onclick="go('b2');cd();return false">Desmos Activity</a>
+      </div>
+    </li>
+    <li><a href="#" onclick="go('conclusion');return false">Conclusion</a></li>
+    <li><a href="#" onclick="go('refs');return false">References</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="hero-wrap">
+    <div class="hero-grid"></div><div class="hero-glow1"></div><div class="hero-glow2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><div class="hero-dot"></div>EDU542 ICT in Education</div>
+        <h1 class="hero-h1">Professional<br><em>Digital Pedagogy</em><br>Portfolio</h1>
+        <p class="hero-p">A critical evaluation of 10 technology tools for Stage 5 Mathematics (Years 9–10), with classroom-ready activities aligned to the NESA curriculum and APST Standards.</p>
+        <a href="#" class="hero-btn" onclick="go('ov');return false">Start with Part A ↗</a>
+      </div>
+      <div class="info-cards">
+        <div class="info-card"><div class="ic-icon t">🎓</div><div><span class="ic-strong">MD Mamun Uddin</span><span class="ic-sub">Student ID: 25002161</span></div></div>
+        <div class="info-card"><div class="ic-icon b">🏫</div><div><span class="ic-strong">Alphacrucis University College</span><span class="ic-sub">Master of Teaching (Secondary)</span></div></div>
+        <div class="info-card"><div class="ic-icon g">📐</div><div><span class="ic-strong">Mathematics — Stage 5</span><span class="ic-sub">Years 9–10 | NESA K–10 Syllabus</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="page" id="ov">
+  <div class="page-banner"><div class="pg-wrap">
+    <div class="pg-tag">Part A</div>
+    <h1 class="pg-title">Critical Evaluation of 10 Technology Tools</h1>
+    <p class="pg-sub">Each tool is evaluated for pedagogical value, NESA alignment, ethical considerations, and APST Standards — grounded in Stage 5 Mathematics (Years 9–10) and verified peer-reviewed research (2018–2026).</p>
+  </div></div>
+  <div class="wrap">
+    <div class="ov-intro">The ten tools evaluated in this portfolio represent a deliberate selection grounded in pedagogical evidence rather than novelty. Each tool was chosen because it serves a specific pedagogical purpose in the Stage 5 Mathematics classroom — enabling me as the teacher to demonstrate a specific APST Standard through the way I use it. All research cited is peer-reviewed and published between 2018 and 2026.</div>
+    <div class="tool-grid">
+      <a class="tg-card" href="#" onclick="go('t1');return false" style="animation-delay:.05s"><span class="tg-num">01</span><span class="tg-name">GeoGebra</span></a>
+      <a class="tg-card" href="#" onclick="go('t2');return false" style="animation-delay:.1s"><span class="tg-num">02</span><span class="tg-name">Desmos</span></a>
+      <a class="tg-card" href="#" onclick="go('t3');return false" style="animation-delay:.15s"><span class="tg-num">03</span><span class="tg-name">Kahoot!</span></a>
+      <a class="tg-card" href="#" onclick="go('t4');return false" style="animation-delay:.2s"><span class="tg-num">04</span><span class="tg-name">Padlet</span></a>
+      <a class="tg-card" href="#" onclick="go('t5');return false" style="animation-delay:.25s"><span class="tg-num">05</span><span class="tg-name">Nearpod</span></a>
+      <a class="tg-card" href="#" onclick="go('t6');return false" style="animation-delay:.3s"><span class="tg-num">06</span><span class="tg-name">Wolfram Alpha</span></a>
+      <a class="tg-card" href="#" onclick="go('t7');return false" style="animation-delay:.35s"><span class="tg-num">07</span><span class="tg-name">Canva</span></a>
+      <a class="tg-card" href="#" onclick="go('t8');return false" style="animation-delay:.4s"><span class="tg-num">08</span><span class="tg-name">Khan Academy</span></a>
+      <a class="tg-card" href="#" onclick="go('t9');return false" style="animation-delay:.45s"><span class="tg-num">09</span><span class="tg-name">Quizizz</span></a>
+      <a class="tg-card" href="#" onclick="go('t10');return false" style="animation-delay:.5s"><span class="tg-num">10</span><span class="tg-name">Google Classroom</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 1 -->
+<div class="page" id="t1">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 01 · APST 2.1 & 2.6</div>
+    <div class="t-name">GeoGebra</div>
+    <a class="t-url" href="https://www.geogebra.org" target="_blank">🔗 geogebra.org</a><br>
+    <a class="t-btn" href="https://www.geogebra.org" target="_blank">Visit GeoGebra ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>MA5.2-9NA (Non-Linear Relationships)</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Free dynamic mathematics platform. Students can play with live graphs and geometric objects — converting abstract Stage 5 material into a mathematical space to investigate. Zulnaidi et al. (2020) confirmed significant improvement in functions when GeoGebra was used with 80 high school students.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Conceptual depth and differentiation across the full ability range</li><li>Strong numeracy integration working with coordinates, functions and gradients</li><li>Free, cross-platform, and works offline — equity-positive for all NSW school contexts</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Cognitive overload if applets expose too many parameters simultaneously</li><li>High teacher preparation time to design quality applets</li><li>Privacy: student accounts require GDPR school approval</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">No advertising; no accounts required for basic use. Teacher must verify mathematical accuracy of all applets against NESA outcomes before use. School privacy policy approval required before creating student accounts.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 2.1 & 2.6</div><p>APST 2.1 (content knowledge) and 2.6 (ICT to expand learning). Designing a dynamic exploration demonstrates higher-order pedagogical content knowledge than static instruction (Ziatdinov & Valles, 2022).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Zulnaidi, H., Oktavika, E., & Hidayat, R. (2020). Education and Information Technologies, 25(1), 51–72. <a href="https://doi.org/10.1007/s10639-019-09899-y" target="_blank">https://doi.org/10.1007/s10639-019-09899-y</a></p>
+      <p>Ziatdinov, R., & Valles, J. R. (2022). Mathematics, 10(3), 398. <a href="https://doi.org/10.3390/math10030398" target="_blank">https://doi.org/10.3390/math10030398</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 2 -->
+<div class="page" id="t2">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 02 · APST 1.2 & 1.5</div>
+    <div class="t-name">Desmos Activity Builder</div>
+    <a class="t-url" href="https://teacher.desmos.com" target="_blank">🔗 teacher.desmos.com</a><br>
+    <a class="t-btn" href="https://teacher.desmos.com" target="_blank">Visit Desmos ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>MA5.1-6NA (Linear Relationships); MA5.2-9NA (Non-Linear Relationships)</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Multi-screen interactive lesson platform with real-time teacher dashboard showing every student's graph and response. Chechan et al. (2023) found statistically significant improvement in function understanding (n=98 secondary students) when Desmos was used.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Real-time individual formative data — reveals misconceptions as they form, not after a test</li><li>Self-paced differentiation; no student accounts required; students join via class code</li><li>Live graphing environment with strong numeracy integration</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Requires reliable internet per student — equity barrier in lower-SES settings</li><li>Significant teacher design investment required for quality activities</li><li>Distraction risk without structured screen parameters</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Data stored on US servers but minimal PII collected as students join without accounts. Anonymised sharing protects students during class discussion. No advertising served to students in classroom sessions.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 1.2 & 1.5</div><p>APST 1.2 (understand how students learn) and 1.5 (differentiate for diverse learners). Real-time dashboard enables within-lesson evidence-based instructional response (Chechan et al., 2023).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Chechan, B., Ampadu, E., & Pears, A. (2023). Eurasia Journal of Mathematics, Science and Technology Education, 19(10), em2331. <a href="https://doi.org/10.29333/ejmste/13540" target="_blank">https://doi.org/10.29333/ejmste/13540</a></p>
+      <p>Wang, A. I., & Tahir, R. (2020). Computers & Education, 149, 103818. <a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank">https://doi.org/10.1016/j.compedu.2020.103818</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 3 -->
+<div class="page" id="t3">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 03 · APST 5.1 & 5.4</div>
+    <div class="t-name">Kahoot!</div>
+    <a class="t-url" href="https://kahoot.com" target="_blank">🔗 kahoot.com</a><br>
+    <a class="t-btn" href="https://kahoot.com" target="_blank">Visit Kahoot! ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>All Stage 5 content strands — diagnostic and revision tool</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Game-based formative assessment platform. Post-game item-level analytics identify specific concepts requiring reteaching. Wang and Tahir (2020) reviewed 93 studies and confirmed positive effects on learning performance when post-game data is actively used by teachers.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>High engagement; post-game item analytics drive evidence-based instructional decisions</li><li>Game-PIN join requires no student accounts — minimal data collection</li><li>Brief 10–15 minute format fits any lesson structure</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Time pressure disadvantages EAL/D and anxious learners — inaccurate assessment data</li><li>Multiple-choice cannot assess reasoning or proof</li><li>Gamification risks shifting motivation from learning to winning</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Game-PIN minimises data collection; GDPR-compliant servers (Norway). Team mode must be used to prevent public humiliation of low performers. AI question builder requires teacher review for mathematical accuracy before classroom use.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 5.1 & 5.4</div><p>APST 5.1 (assessment strategies) and 5.4 (interpret data to modify teaching). Post-game analytics enable the evidence-based instructional decisions Standard 5.4 requires (Wang & Tahir, 2020).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Wang, A. I., & Tahir, R. (2020). Computers & Education, 149, 103818. <a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank">https://doi.org/10.1016/j.compedu.2020.103818</a></p>
+      <p>Naamati-Schneider, L., & Alt, D. (2023). Frontiers in Psychology, 14, 1157621. <a href="https://doi.org/10.3389/fpsyg.2023.1157621" target="_blank">https://doi.org/10.3389/fpsyg.2023.1157621</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 4 -->
+<div class="page" id="t4">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 04 · APST 4.1 & 4.4</div>
+    <div class="t-name">Padlet</div>
+    <a class="t-url" href="https://padlet.com" target="_blank">🔗 padlet.com</a><br>
+    <a class="t-btn" href="https://padlet.com" target="_blank">Visit Padlet ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>MA5.2-2WM (Select strategies); MA5.2-3WM (Reasoning and justification)</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Moderated collaborative digital board. Students share problem-solving approaches without public vulnerability. Naamati-Schneider and Alt (2023) found that Padlet-mediated collaboration significantly increased perceived participation safety compared to face-to-face contribution.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Teacher-moderated posting prevents harmful peer responses</li><li>Anonymous option reduces mathematics anxiety; increases inclusive participation</li><li>Literacy integration via written justifications aligned to MA5.2-3WM</li><li>Formative data on all students including the quietest</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Free tier limits to 3 boards — constraint for multi-unit sustained use</li><li>Delayed moderation disrupts lesson flow</li><li>Open format risks off-task behaviour without clear task parameters</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Guest posting requires no accounts (COPPA-compliant for 13+). Teacher must explicitly disclose to students that all posts, including anonymous ones, are visible through the moderation dashboard. Students must not post personally identifiable information.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 4.1 & 4.4</div><p>APST 4.1 (inclusive participation) and 4.4 (safe interactions). Moderated anonymous board creates the psychological safety that Standard 4.1 requires (Naamati-Schneider & Alt, 2023).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Naamati-Schneider, L., & Alt, D. (2023). Frontiers in Psychology, 14, 1157621. <a href="https://doi.org/10.3389/fpsyg.2023.1157621" target="_blank">https://doi.org/10.3389/fpsyg.2023.1157621</a></p>
+      <p>Chechan, B., Ampadu, E., & Pears, A. (2023). Eurasia Journal of Mathematics, Science and Technology Education, 19(10), em2331. <a href="https://doi.org/10.29333/ejmste/13540" target="_blank">https://doi.org/10.29333/ejmste/13540</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 5 -->
+<div class="page" id="t5">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 05 · APST 3.3, 3.4 & 3.6</div>
+    <div class="t-name">Nearpod</div>
+    <a class="t-url" href="https://nearpod.com" target="_blank">🔗 nearpod.com</a><br>
+    <a class="t-btn" href="https://nearpod.com" target="_blank">Visit Nearpod ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>MA5.2-12MG (Surface Area and Volume) — applicable across all Stage 5 strands</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Complete lesson delivery platform embedding tasks, polls, and formative checkpoints within a structured sequence. Hakami (2020) found Nearpod-integrated lessons produced significantly higher active learning outcomes than traditional delivery (n=74 students).</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Multi-strategy lesson delivery in one platform — planning, delivery, and evaluation combined</li><li>Self-paced differentiation; real-time individual dashboard data</li><li>Lesson data supports post-lesson evaluation and program improvement</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Free tier restricts lesson size — school subscription required for sustained use</li><li>Home internet required for self-paced mode — equity concern</li><li>AI content builder requires teacher verification for mathematical accuracy</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Data stored on US servers — school data governance must be confirmed before use. Student accounts managed through teacher-controlled class codes. AI-generated lesson content must always be teacher-verified before student use — mathematically inaccurate AI content in class is an ethical failure.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 3.3, 3.4 & 3.6</div><p>APST 3.3 (teaching strategies), 3.4 (select resources), and 3.6 (evaluate programs). Nearpod is simultaneously a planning, delivery, and evaluation tool — addressing all three sub-standards (Hakami, 2020).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Hakami, M. (2020). Journal of Education and Learning, 9(1), 119–126. <a href="https://doi.org/10.5539/jel.v9n1p119" target="_blank">https://doi.org/10.5539/jel.v9n1p119</a></p>
+      <p>Zulnaidi, H., Oktavika, E., & Hidayat, R. (2020). Education and Information Technologies, 25(1), 51–72. <a href="https://doi.org/10.1007/s10639-019-09899-y" target="_blank">https://doi.org/10.1007/s10639-019-09899-y</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 6 -->
+<div class="page" id="t6">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 06 · APST 2.6</div>
+    <div class="t-name">Wolfram Alpha</div>
+    <a class="t-url" href="https://www.wolframalpha.com" target="_blank">🔗 wolframalpha.com</a><br>
+    <a class="t-btn" href="https://www.wolframalpha.com" target="_blank">Visit Wolfram Alpha ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10 (extension and verification)</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>MA5.3-7NA (Real Numbers); MA5.3-8NA (Polynomials); MA5.3-14MG (Trigonometry)</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Computational knowledge engine used as a post-solution verification tool. Students complete problems by hand, then check their working against Wolfram's step-by-step output. Ziatdinov and Valles (2022) confirm computational tools expand mathematical inquiry beyond what is accessible by hand.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Verifies multi-step calculations and shows step-by-step working</li><li>Supports extension inquiry beyond the core Stage 5 syllabus</li><li>Rewards reasoning when used as checker; free with no account required</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>High misuse risk — students may bypass mathematical thinking entirely</li><li>Overuse erodes manual computation skills required in NESA assessments</li><li>Query data retained by Wolfram Research</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Academic integrity is the primary ethical concern. Explicit classroom protocols and a dedicated digital citizenship lesson are required before any student use. The tool must be framed as a post-solution checker, never an answer generator. Students should not include personal information in queries.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standard 2.6</div><p>APST 2.6 (ICT to expand learning). Expands Stage 5 mathematical inquiry range under explicit teacher-guided academic integrity protocols (Ziatdinov & Valles, 2022).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Ziatdinov, R., & Valles, J. R. (2022). Mathematics, 10(3), 398. <a href="https://doi.org/10.3390/math10030398" target="_blank">https://doi.org/10.3390/math10030398</a></p>
+      <p>Wang, A. I., & Tahir, R. (2020). Computers & Education, 149, 103818. <a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank">https://doi.org/10.1016/j.compedu.2020.103818</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 7 -->
+<div class="page" id="t7">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 07 · APST 3.3 & 2.5</div>
+    <div class="t-name">Canva for Education</div>
+    <a class="t-url" href="https://www.canva.com/education" target="_blank">🔗 canva.com/education</a><br>
+    <a class="t-btn" href="https://www.canva.com/education" target="_blank">Visit Canva for Education ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, cross-curricular</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>MA5.2-3WM (Reasoning and justification); Literacy General Capability</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Free graphic design platform used for authentic multimodal production tasks. Students design mathematical infographics, developing written and visual communication alongside content knowledge. Naamati-Schneider and Alt (2023) confirm digital production tasks increase student engagement and learning ownership.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Literacy integration — students communicate mathematics visually and in writing</li><li>Built-in differentiation via templates for foundational learners; open design for extension</li><li>Authentic audience gives learning purpose beyond the teacher; free for verified teachers</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Aesthetic-over-accuracy risk — assessment must prioritise content rigour over design quality</li><li>Broad template library can distract without tightly defined task parameters</li><li>AI generation tools raise academic integrity questions requiring explicit discussion</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">COPPA/FERPA-compliant; no advertising on school accounts. Students must not upload personal photographs. AI authorship must be explicitly addressed as an academic integrity lesson before any assessed task — the distinction between AI-assisted design and original student work must be clear.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 3.3 & 2.5</div><p>APST 3.3 (repertoire of strategies) and 2.5 (literacy and numeracy strategies). Multimodal production integrates mathematical and literacy outcomes, supported by evidence of increased learning ownership (Naamati-Schneider & Alt, 2023).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Naamati-Schneider, L., & Alt, D. (2023). Frontiers in Psychology, 14, 1157621. <a href="https://doi.org/10.3389/fpsyg.2023.1157621" target="_blank">https://doi.org/10.3389/fpsyg.2023.1157621</a></p>
+      <p>Chechan, B., Ampadu, E., & Pears, A. (2023). Eurasia Journal of Mathematics, Science and Technology Education, 19(10), em2331. <a href="https://doi.org/10.29333/ejmste/13540" target="_blank">https://doi.org/10.29333/ejmste/13540</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 8 -->
+<div class="page" id="t8">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 08 · APST 1.5 & 5.1</div>
+    <div class="t-name">Khan Academy</div>
+    <a class="t-url" href="https://www.khanacademy.org" target="_blank">🔗 khanacademy.org</a><br>
+    <a class="t-btn" href="https://www.khanacademy.org" target="_blank">Visit Khan Academy ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10 (consolidation and revision)</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>All Stage 5 content strands — supplementary self-paced practice</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Free non-profit mastery-based practice platform with adaptive exercises and a teacher dashboard. Used for consolidation and homework. Vidergor and Ben-Amram (2020) found secondary mathematics students perceived themselves as more independent learners and found the platform more accessible than textbooks.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Free, no advertising, accessible on low-spec devices — most equitable tool in this portfolio</li><li>Adaptive practice engine personalises exercises; comprehensive teacher dashboard</li><li>Embedded video hints develop mathematical vocabulary alongside procedural skills</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Predominantly procedural — higher-order reasoning is underrepresented</li><li>Plain interface risks disengagement in extended practice sessions</li><li>Requires continuous internet — barrier for students without home Wi-Fi</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Non-profit privacy stance — data not sold or used for advertising; COPPA-compliant. Khanmigo AI tutor requires explicit school opt-in and teacher verification before any student use. Teacher presence must remain central — the platform supplements but must not replace the teacher-student relationship.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standards 1.5 & 5.1</div><p>APST 1.5 (differentiate teaching) and 5.1 (assessment strategies). Adaptive engine provides personalised practice at scale; teacher dashboard supports formative planning (Vidergor & Ben-Amram, 2020).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Vidergor, H. E., & Ben-Amram, P. (2020). Computers & Education, 157, 103985. <a href="https://doi.org/10.1016/j.compedu.2020.103985" target="_blank">https://doi.org/10.1016/j.compedu.2020.103985</a></p>
+      <p>Rueda-Gómez, K. L., Rodríguez-Muñiz, L. J., & Muñiz-Rodríguez, L. (2023). Heliyon, 9(4), e15441. <a href="https://doi.org/10.1016/j.heliyon.2023.e15441" target="_blank">https://doi.org/10.1016/j.heliyon.2023.e15441</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 9 -->
+<div class="page" id="t9">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 09 · APST 5.2</div>
+    <div class="t-name">Quizizz</div>
+    <a class="t-url" href="https://quizizz.com" target="_blank">🔗 quizizz.com</a><br>
+    <a class="t-btn" href="https://quizizz.com" target="_blank">Visit Quizizz ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>All Stage 5 content strands — revision and formative practice</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Asynchronous gamified quiz platform with explanatory post-question feedback. Unlike Kahoot, Quizizz removes time pressure and explains why each answer is correct. Wang and Tahir (2020) found feedback quality is the key variable determining whether game-based tools produce genuine learning gains.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Explanatory feedback tells students why an answer is correct — not just right/wrong</li><li>Self-paced removes time pressure — more equitable for EAL/D and anxious learners</li><li>Game elements maintain engagement; no accounts required for guest play</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Multiple-choice cannot assess reasoning, proof, or multi-step problem-solving</li><li>Default meme insertion can be culturally inappropriate — must always be disabled</li><li>Student responses stored on US servers — school data governance must be verified</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">Minimal data for guest play. Meme feature must be disabled — algorithmically selected memes can be culturally insensitive. Student performance data must be used formatively and never publicly displayed or used as a shaming mechanism.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standard 5.2</div><p>APST 5.2 (provide feedback). Explanatory post-question feedback targets the student's specific learning gap — enacting the feedback quality Standard 5.2 requires (Wang & Tahir, 2020).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Wang, A. I., & Tahir, R. (2020). Computers & Education, 149, 103818. <a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank">https://doi.org/10.1016/j.compedu.2020.103818</a></p>
+      <p>Hakami, M. (2020). Journal of Education and Learning, 9(1), 119–126. <a href="https://doi.org/10.5539/jel.v9n1p119" target="_blank">https://doi.org/10.5539/jel.v9n1p119</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL 10 -->
+<div class="page" id="t10">
+  <div class="tool-hero"><div class="pg-wrap">
+    <div class="t-tag">Tool 10 · APST 4.5</div>
+    <div class="t-name">Google Classroom</div>
+    <a class="t-url" href="https://classroom.google.com" target="_blank">🔗 classroom.google.com</a><br>
+    <a class="t-btn" href="https://classroom.google.com" target="_blank">Visit Google Classroom ↗</a>
+  </div></div>
+  <div class="wrap">
+    <div class="i-grid">
+      <div class="i-cell"><label>Subject & Year Level</label><p>Mathematics — Stage 5, Years 9–10 (organisational infrastructure)</p></div>
+      <div class="i-cell"><label>NESA Outcomes</label><p>All Stage 5 content strands — organisational infrastructure</p></div>
+      <div class="i-cell full-col"><label>Pedagogical Function</label><p>Free LMS to plan assignments, give feedback, and conduct structured class communication. Not a pedagogical tool in itself — it does not teach mathematics — but it creates the structured, safe digital environment that makes all other digital learning possible. Vidergor and Ben-Amram (2020) emphasise that effective online learning requires structured digital spaces with defined teacher presence.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><div class="ch s"><div class="cdot g"></div><h3>Strengths</h3></div><div class="cb"><ul><li>Private teacher-moderated environment — safer than open social media platforms</li><li>Silent differentiation of assignments protects dignity of learners receiving modified tasks</li><li>Guardian summaries support home-school communication; seamless Google ecosystem</li></ul></div></div>
+      <div class="card"><div class="ch l"><div class="cdot o"></div><h3>Limitations & Risks</h3></div><div class="cb"><ul><li>Requires home device and internet — equity risk for low-SES students</li><li>Value depends entirely on quality of content placed within it</li><li>Google data practices require verification under the Privacy Act 1988</li></ul></div></div>
+    </div>
+    <div class="eth-card"><div class="eth-h"><h3>⚖️ Ethical Considerations</h3></div><div class="eth-b">FERPA-compliant; no advertising; only school-provisioned accounts permitted — personal Gmail must not be required for class work. All posts are school digital records. Modelling responsible digital communication within Classroom is itself a form of ICT ethics education aligned to Standard 4.5.</div></div>
+    <div class="apst"><div class="apst-lbl">⭐ APST Alignment — Standard 4.5</div><p>APST 4.5 (use ICT safely, responsibly, ethically). Selecting Classroom over social media reflects principled professional judgement regarding student digital safety (Vidergor & Ben-Amram, 2020).</p></div>
+    <div class="refs"><div class="refs-lbl">📚 Research Support</div>
+      <p>Vidergor, H. E., & Ben-Amram, P. (2020). Computers & Education, 157, 103985. <a href="https://doi.org/10.1016/j.compedu.2020.103985" target="_blank">https://doi.org/10.1016/j.compedu.2020.103985</a></p>
+      <p>Rueda-Gómez, K. L., Rodríguez-Muñiz, L. J., & Muñiz-Rodríguez, L. (2023). Heliyon, 9(4), e15441. <a href="https://doi.org/10.1016/j.heliyon.2023.e15441" target="_blank">https://doi.org/10.1016/j.heliyon.2023.e15441</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- RANKING -->
+<div class="page" id="ranking">
+  <div class="page-banner"><div class="pg-wrap">
+    <div class="pg-tag">Ranking</div>
+    <h1 class="pg-title">Ranking of 10 Tools</h1>
+    <p class="pg-sub">Based on three criteria: pedagogical depth, accessibility/equity, and Stage 5 Mathematics curricular impact. Each ranking justified by peer-reviewed evidence (2018–2026).</p>
+  </div></div>
+  <div class="wrap">
+    <table class="rank-tbl">
+      <thead><tr><th>#</th><th>Tool</th><th>Score</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr><td><div class="rb r12">1</div></td><td class="tn">GeoGebra</td><td><span class="sc">9.5</span></td><td>Highest pedagogical depth; conceptual inquiry; free; equity-positive; Zulnaidi et al. (2020).</td></tr>
+        <tr><td><div class="rb r12">2</div></td><td class="tn">Desmos</td><td><span class="sc">9.0</span></td><td>Real-time individual data; no accounts needed; Chechan et al. (2023).</td></tr>
+        <tr><td><div class="rb r34">3</div></td><td class="tn">Khan Academy</td><td><span class="sc">8.5</span></td><td>Most equitable; free; adaptive; Vidergor & Ben-Amram (2020).</td></tr>
+        <tr><td><div class="rb r34">4</div></td><td class="tn">Nearpod</td><td><span class="sc">8.0</span></td><td>Full lesson planning and delivery tool; Hakami (2020). Subscription is a barrier.</td></tr>
+        <tr><td><div class="rb r567">5</div></td><td class="tn">Quizizz</td><td><span class="sc">7.5</span></td><td>Explanatory feedback superior to Kahoot; no time pressure; Wang & Tahir (2020).</td></tr>
+        <tr><td><div class="rb r567">6</div></td><td class="tn">Kahoot!</td><td><span class="sc">7.0</span></td><td>High engagement; time pressure limits equity; Wang & Tahir (2020).</td></tr>
+        <tr><td><div class="rb r567">7</div></td><td class="tn">Padlet</td><td><span class="sc">6.5</span></td><td>Best for communication and anxiety reduction; free-tier limits sustained use.</td></tr>
+        <tr><td><div class="rb r8910">8</div></td><td class="tn">Google Classroom</td><td><span class="sc">6.0</span></td><td>Essential infrastructure; value depends entirely on content quality within it.</td></tr>
+        <tr><td><div class="rb r8910">9</div></td><td class="tn">Canva for Education</td><td><span class="sc">5.5</span></td><td>Strong literacy integration; aesthetic-over-content risk in mathematics.</td></tr>
+        <tr><td><div class="rb r8910">10</div></td><td class="tn">Wolfram Alpha</td><td><span class="sc">5.0</span></td><td>Powerful but highest misuse risk; unsupervised use requires strict protocols.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PART B: GEOGEBRA -->
+<div class="page" id="b1">
+  <div class="page-banner"><div class="pg-wrap">
+    <div class="pg-tag">Part B · Tool 1 · Deep Development</div>
+    <h1 class="pg-title">GeoGebra — Year 10 Non-Linear Relationships</h1>
+    <p class="pg-sub">NESA Outcome MA5.2-9NA: Connects graphs and equations of parabolas with equations of the form y = ax² + c</p>
+  </div></div>
+  <div class="wrap">
+    <div class="meta-row">
+      <div class="mc"><div class="mi">📅</div><div class="ml">Duration</div><div class="mv">60 minutes</div></div>
+      <div class="mc"><div class="mi">👥</div><div class="ml">Year Level</div><div class="mv">Year 10 — Stage 5</div></div>
+      <div class="mc"><div class="mi">📘</div><div class="ml">NESA Outcome</div><div class="mv">MA5.2-9NA</div></div>
+    </div>
+    <div class="i-grid" style="margin-bottom:1.8rem">
+      <div class="i-cell"><label>Literacy Integration</label><p>Students compose a carefully structured conjecture statement and justification paragraph using specific mathematical terms: vertex, axis of symmetry, coefficient, dilation, direction of opening. Mathematical writing assessed with a rubric conforming to MA5.2-3WM.</p></div>
+      <div class="i-cell"><label>Numeracy Integration</label><p>Students calculate the effect of parameter changes on key features — vertex coordinates, y-intercept, direction of opening — using both exact and decimal values read directly from the dynamic GeoGebra coordinate display.</p></div>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--navy);margin-bottom:.75rem">Activity: "How Does <em>a</em> Change the Parabola?"</h3>
+    <p style="color:var(--mid);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem">Students open a pre-built GeoGebra applet displaying y = ax² with a slider controlling <em>a</em> from −5 to +5. The coordinate grid, equation, and a table of selected (x, y) values update in real time as the slider moves. Students work through a printed investigation sheet — the technology provides the dynamic mathematical environment; the sheet provides the structured thinking scaffold. As Zulnaidi et al. (2020) found, GeoGebra's visual and dynamic representation of functions significantly supports student achievement when accompanied by structured teacher-designed tasks.</p>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="sc2"><h4>Explore — 15 minutes</h4><p>Students adjust the slider and record observations in a structured table. Guiding questions on the sheet: "What happens when a > 1? When 0 &lt; a &lt; 1? When a is negative? When a = 0?" Students record in precise mathematical language — full sentences required.</p></div></div>
+      <div class="step" style="animation-delay:.07s"><div class="sn">2</div><div class="sc2"><h4>Conjecture — 10 minutes</h4><p>Students write two conjecture statements using a sentence frame: "I notice that when a ___, the parabola ___. I think this happens because ___." Sentence frames are removed for Core and Extension learners — they write in their own mathematical voice.</p></div></div>
+      <div class="step" style="animation-delay:.12s"><div class="sn">3</div><div class="sc2"><h4>Verify — 10 minutes</h4><p>Students predict what y = 3x² and y = −0.5x² will look like before adjusting the slider to check. They record whether each prediction was correct and revise their conjecture where needed — developing the habit of testing mathematical claims before asserting them.</p></div></div>
+      <div class="step" style="animation-delay:.16s"><div class="sn">4</div><div class="sc2"><h4>Generalise — Padlet Board — 10 minutes</h4><p>Each pair posts their finalised conjecture to the class Padlet board. Teacher projects two anonymised responses and facilitates a discussion about which formulation is most mathematically precise — developing the language of mathematical generalisation required by MA5.2-3WM.</p></div></div>
+      <div class="step" style="animation-delay:.2s"><div class="sn">5</div><div class="sc2"><h4>Apply Independently — 15 minutes</h4><p>(1) Sketch y = 2x² and y = −x² without technology. (2) Write the equation of a parabola wider than y = x² that opens downward. (3) Explain in one sentence why y = ax² always passes through the origin regardless of the value of a. These apply MA5.2-9NA outcomes directly.</p></div></div>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin-bottom:1rem">Differentiation Strategies</h3>
+    <div class="diff-g">
+      <div class="dc f"><h4>🔵 Foundation</h4><p>Observation table and sentence frames partially completed for all phases. Slider increment set to whole numbers only. Teacher checks in individually after Phase 1 before student proceeds to conjecture phase. Key vocabulary word wall displayed throughout.</p></div>
+      <div class="dc c"><h4>🟢 Core</h4><p>All five phases completed as designed. Investigation sheet provides guiding questions but not answers. Students write conjectures without sentence frames and justify using precise mathematical vocabulary from the word wall.</p></div>
+      <div class="dc e"><h4>🟠 Extension</h4><p>Students extend the applet to explore y = ax² + c by adding a second slider for c. They investigate what c controls, generalise the vertex formula, and verify using coordinate geometry — connecting to Stage 5.3 and Stage 6 content independently.</p></div>
+      <div class="dc d"><h4>🟣 EAL/D Support</h4><p>Key vocabulary (vertex, coefficient, parabola, conjecture) on a visual word wall throughout the lesson. Students may draft conjectures in their first language before translating — the teacher is assessing conceptual understanding, not English fluency.</p></div>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:.75rem">Assessment</h3>
+    <p style="color:var(--mid);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem">Formative: Teacher circulates during Phases 1–2, reading conjecture drafts and asking probing questions. The Padlet board provides whole-class formative data. Summative element: Phase 5 individual tasks are collected and assessed using a single-point rubric aligned to MA5.2-9NA — specifically assessing whether the student can (a) accurately sketch parabolas from equations, (b) correctly identify the effect of parameter a, and (c) justify their reasoning in written mathematical language aligned to MA5.2-3WM.</p>
+    <div class="scholar"><div class="scholar-lbl">📖 Scholarly Support</div><p>Zulnaidi et al. (2020) conducted a quasi-experiment with 80 high school students and found significant improvements in mathematics achievement when GeoGebra was used as a teaching aid for functions and non-linear relationships — precisely the NESA outcome this activity targets. The constructivist exploration sequence used here aligns with the pedagogical approach endorsed by Ziatdinov and Valles (2022), who demonstrate that GeoGebra-based investigation tasks produce deeper conceptual understanding than static instruction by making mathematical relationships dynamic and student-investigable.<br><br>
+    <a href="https://doi.org/10.1007/s10639-019-09899-y" target="_blank">Zulnaidi et al. (2020) → https://doi.org/10.1007/s10639-019-09899-y</a><br>
+    <a href="https://doi.org/10.3390/math10030398" target="_blank">Ziatdinov & Valles (2022) → https://doi.org/10.3390/math10030398</a></p></div>
+  </div>
+</div>
+
+<!-- PART B: DESMOS -->
+<div class="page" id="b2">
+  <div class="page-banner"><div class="pg-wrap">
+    <div class="pg-tag">Part B · Tool 2 · Deep Development</div>
+    <h1 class="pg-title">Desmos — Year 9 Linear Relationships</h1>
+    <p class="pg-sub">NESA Outcome MA5.1-6NA: Determines the midpoint, gradient and length of an interval, and graphs linear relationships</p>
+  </div></div>
+  <div class="wrap">
+    <div class="meta-row">
+      <div class="mc"><div class="mi">📅</div><div class="ml">Duration</div><div class="mv">50 minutes</div></div>
+      <div class="mc"><div class="mi">👥</div><div class="ml">Year Level</div><div class="mv">Year 9 — Stage 5</div></div>
+      <div class="mc"><div class="mi">📘</div><div class="ml">NESA Outcome</div><div class="mv">MA5.1-6NA</div></div>
+    </div>
+    <div class="i-grid" style="margin-bottom:1.8rem">
+      <div class="i-cell"><label>Literacy Integration</label><p>Screen 5: Students write a definition of gradient in their own words and explain why two lines with the same gradient can never intersect — both assessed against MA5.2-3WM mathematical reasoning and justification outcomes.</p></div>
+      <div class="i-cell"><label>Numeracy Integration</label><p>Screen 4: Students calculate gradient using rise/run from three coordinate pairs, read coordinates from a dynamic graph, and evaluate how changing the gradient value affects the line's angle of inclination — directly assessed against MA5.1-6NA.</p></div>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--navy);margin-bottom:.75rem">Activity: "What Does Gradient Actually Mean?"</h3>
+    <p style="color:var(--mid);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem">Students join a teacher-created Desmos Activity Builder session via a class code displayed on the board. The six-screen activity builds understanding of gradient progressively — from its everyday meaning (steepness) to its precise algebraic definition (rise over run) to its graphical representation as the slope of a straight line. The teacher dashboard is open throughout and actively used to drive whole-class discussion in Screen 6. As Chechan et al. (2023) found, students using Desmos developed enhanced ability to analyse and verify mathematical functions through visualisation — abilities directly applicable to the gradient concepts targeted in this activity.</p>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="sc2"><h4>Screen 1 — Card Sort (Literacy)</h4><p>Students sort six slope descriptions — "steep uphill", "gentle downhill", "flat", "vertical cliff" — and match each to a corresponding line image. Activates prior knowledge and builds the vocabulary students will need for written responses in Screen 5.</p></div></div>
+      <div class="step" style="animation-delay:.07s"><div class="sn">2</div><div class="sc2"><h4>Screen 2 — Sketch (Diagnostic)</h4><p>Students sketch what they think a line with "gradient 2" looks like using the freehand draw tool. The teacher dashboard captures every response simultaneously — revealing pre-existing misconceptions before any instruction begins, directly informing the next teaching move.</p></div></div>
+      <div class="step" style="animation-delay:.12s"><div class="sn">3</div><div class="sc2"><h4>Screen 3 — Slider Exploration</h4><p>An interactive graph of y = mx with a slider for m from −5 to +5. Students move the slider and answer three structured questions: "What does a positive m produce? A negative m? What does m = 0 give?" Building conceptual understanding before the formal definition is introduced.</p></div></div>
+      <div class="step" style="animation-delay:.17s"><div class="sn">4</div><div class="sc2"><h4>Screen 4 — Calculate (Numeracy)</h4><p>Three coordinate pairs provided. Students calculate gradient using rise/run and enter answers. Immediate correct/incorrect feedback with a hint pointing to the rise-over-run formula — available after one incorrect attempt, not immediately, to preserve productive struggle.</p></div></div>
+      <div class="step" style="animation-delay:.22s"><div class="sn">5</div><div class="sc2"><h4>Screen 5 — Written Response (Literacy)</h4><p>"Explain in your own words what gradient measures. Why would two lines with the same gradient never cross?" Students type a full-sentence paragraph. The teacher reads all responses on the dashboard before Screen 6 — identifying which students have conceptual versus only procedural knowledge.</p></div></div>
+      <div class="step" style="animation-delay:.27s"><div class="sn">6</div><div class="sc2"><h4>Screen 6 — Whole-Class Synthesis</h4><p>Teacher presents two anonymised Screen 5 responses — one accurate, one containing a common misconception. Five-minute facilitated discussion to build a class consensus definition of gradient. Teacher uses dashboard data to decide whether to extend or reteach before the next lesson.</p></div></div>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin-bottom:1rem">Differentiation Strategies</h3>
+    <div class="diff-g">
+      <div class="dc f"><h4>🔵 Foundation</h4><p>Screen 4 hints activated by teacher immediately. A further worked example screen provided after Screen 3 for students still unclear on rise-over-run — delivered silently through Desmos teacher controls without drawing class attention.</p></div>
+      <div class="dc c"><h4>🟢 Core</h4><p>All six screens completed as designed. Screen 4 hints available after one incorrect attempt. Teacher circulates and poses probing questions based on Screen 2 sketches and Screen 5 written responses visible on the dashboard.</p></div>
+      <div class="dc e"><h4>🟠 Extension</h4><p>Hidden bonus screen unlocked by teacher: "Two lines have gradients 2 and −0.5. What do you notice? Investigate the product of gradients of perpendicular lines." Introduces the Stage 5.3 perpendicular gradient relationship.</p></div>
+      <div class="dc d"><h4>🟣 EAL/D Support</h4><p>Mathematical vocabulary (gradient, rise, run, slope, coordinate) pre-taught using a visual glossary distributed at lesson start. Screen 5 responses may be drafted in the student's first language — conceptual understanding is assessed, not English fluency.</p></div>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:.75rem">Assessment</h3>
+    <p style="color:var(--mid);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem">The teacher dashboard provides real-time formative data from all six screens. Screen 2 (sketch) reveals pre-existing misconceptions. Screen 4 (calculation) identifies procedural gaps. Screen 5 (written response) assesses conceptual understanding and mathematical communication aligned to MA5.1-6NA and MA5.1-3WM. The teacher uses Screen 5 data to decide whether to reteach before the next lesson or proceed to graphing y = mx + b. This data-driven instructional decision directly enacts the evidence-based practice required by APST 5.4.</p>
+    <div class="scholar"><div class="scholar-lbl">📖 Scholarly Support</div><p>Chechan et al. (2023) found a statistically significant improvement in high school students' understanding of function concepts when Desmos was used, with students specifically reporting enhanced ability to analyse functions and verify answers through visualisation — abilities that Screens 2, 3, and 4 of this activity sequence directly develop. Wang and Tahir (2020) found that the quality of in-lesson feedback — not the game elements — is the key variable determining whether digital assessment tools produce genuine learning gains.<br><br>
+    <a href="https://doi.org/10.29333/ejmste/13540" target="_blank">Chechan et al. (2023) → https://doi.org/10.29333/ejmste/13540</a><br>
+    <a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank">Wang & Tahir (2020) → https://doi.org/10.1016/j.compedu.2020.103818</a></p></div>
+  </div>
+</div>
+
+<!-- CONCLUSION -->
+<div class="page" id="conclusion">
+  <div class="page-banner"><div class="pg-wrap">
+    <div class="pg-tag">Conclusion</div>
+    <h1 class="pg-title">Conclusion</h1>
+  </div></div>
+  <div class="wrap">
+    <div class="conclusion-box">
+      The ten tools assessed in this portfolio represent a deliberate selection grounded in pedagogical evidence rather than novelty. GeoGebra and Desmos rank highest because they elevate mathematical reasoning — rather than answer-giving — as the main student activity, with peer-reviewed research backing this up. The two classroom activities designed in Part B illustrate how digital tools can be purposefully integrated into Stage 5 Mathematics lessons with direct alignment to NESA outcomes, literacy and numeracy integration, and differentiation for all students. Across all ten tools, the consistent principle is that technology can only serve learning when the teacher makes informed, ethical, and evidence-based choices regarding its selection and use — which is exactly what the APST Standards demand.
+    </div>
+  </div>
+</div>
+
+<!-- REFERENCES -->
+<div class="page" id="refs">
+  <div class="page-banner"><div class="pg-wrap">
+    <div class="pg-tag">References</div>
+    <h1 class="pg-title">References</h1>
+    <p class="pg-sub">APA 7th edition | All peer-reviewed 2018–2026 | All DOIs verified and clickable</p>
+  </div></div>
+  <div class="wrap">
+    <div class="ref-item">AITSL. (2011). <em>Australian Professional Standards for Teachers.</em> Education Services Australia. <a href="https://www.aitsl.edu.au/teach/standards" target="_blank">https://www.aitsl.edu.au/teach/standards</a></div>
+    <div class="ref-item">Chechan, B., Ampadu, E., & Pears, A. (2023). Effect of using Desmos on high school students' understanding and learning of functions. <em>Eurasia Journal of Mathematics, Science and Technology Education, 19</em>(10), em2331. <a href="https://doi.org/10.29333/ejmste/13540" target="_blank">https://doi.org/10.29333/ejmste/13540</a></div>
+    <div class="ref-item">Hakami, M. (2020). Using Nearpod as a tool to promote active learning in higher education in a BYOD learning environment. <em>Journal of Education and Learning, 9</em>(1), 119–126. <a href="https://doi.org/10.5539/jel.v9n1p119" target="_blank">https://doi.org/10.5539/jel.v9n1p119</a></div>
+    <div class="ref-item">Naamati-Schneider, L., & Alt, D. (2023). Online collaborative Padlet-mediated learning in health management studies. <em>Frontiers in Psychology, 14,</em> 1157621. <a href="https://doi.org/10.3389/fpsyg.2023.1157621" target="_blank">https://doi.org/10.3389/fpsyg.2023.1157621</a></div>
+    <div class="ref-item">NSW Education Standards Authority [NESA]. (2012). <em>Mathematics K–10 syllabus.</em> NSW Government. <a href="https://curriculum.nsw.edu.au/learning-areas/mathematics" target="_blank">https://curriculum.nsw.edu.au/learning-areas/mathematics</a></div>
+    <div class="ref-item">Rueda-Gómez, K. L., Rodríguez-Muñiz, L. J., & Muñiz-Rodríguez, L. (2023). Performance and mathematical self-concept in university students using Khan Academy. <em>Heliyon, 9</em>(4), e15441. <a href="https://doi.org/10.1016/j.heliyon.2023.e15441" target="_blank">https://doi.org/10.1016/j.heliyon.2023.e15441</a></div>
+    <div class="ref-item">Vidergor, H. E., & Ben-Amram, P. (2020). Khan Academy effectiveness: The case of math secondary students' perceptions. <em>Computers & Education, 157,</em> 103985. <a href="https://doi.org/10.1016/j.compedu.2020.103985" target="_blank">https://doi.org/10.1016/j.compedu.2020.103985</a></div>
+    <div class="ref-item">Wang, A. I., & Tahir, R. (2020). The effect of using Kahoot! for learning — A literature review. <em>Computers & Education, 149,</em> 103818. <a href="https://doi.org/10.1016/j.compedu.2020.103818" target="_blank">https://doi.org/10.1016/j.compedu.2020.103818</a></div>
+    <div class="ref-item">Ziatdinov, R., & Valles, J. R. (2022). Synthesis of modelling, visualisation, and programming in GeoGebra as an effective approach for teaching and learning STEM topics. <em>Mathematics, 10</em>(3), 398. <a href="https://doi.org/10.3390/math10030398" target="_blank">https://doi.org/10.3390/math10030398</a></div>
+    <div class="ref-item">Zulnaidi, H., Oktavika, E., & Hidayat, R. (2020). Effect of use of GeoGebra on achievement of high school mathematics students. <em>Education and Information Technologies, 25</em>(1), 51–72. <a href="https://doi.org/10.1007/s10639-019-09899-y" target="_blank">https://doi.org/10.1007/s10639-019-09899-y</a></div>
+  </div>
+</div>
+
+<footer><strong>MD Mamun Uddin</strong> · Student ID: 25002161 · Master of Teaching (Secondary) · Alphacrucis University College · EDU542 ICT in Education</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  var t=document.getElementById(id);
+  if(t){t.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+  cd();
+}
+function td(did,bid){
+  var d=document.getElementById(did),b=document.getElementById(bid);
+  var isOpen=d.classList.contains('open');
+  cd();
+  if(!isOpen){d.classList.add('open');b.classList.add('open');}
+}
+function cd(){
+  document.querySelectorAll('.drop').forEach(d=>d.classList.remove('open'));
+  document.querySelectorAll('.nav-items button').forEach(b=>b.classList.remove('open'));
+}
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-items'))cd();});
+</script>
+</body>
+</html>
