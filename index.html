@@ -169,7 +169,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--navy);heig
 footer{background:var(--navy);color:rgba(255,255,255,.48);text-align:center;padding:1.8rem 2rem;font-size:.8rem}
 footer strong{color:rgba(255,255,255,.82)}
 
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-left:auto;flex-shrink:0}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:var(--navy);z-index:9998;overflow-y:auto;max-height:calc(100vh - 62px);border-top:1px solid rgba(255,255,255,.1)}
+.mobile-menu.open{display:block;animation:slideDown .25s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.mob-item{border-bottom:1px solid rgba(255,255,255,.07)}
+.mob-item>a,.mob-item>button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 20px;color:rgba(255,255,255,.85);font-size:.95rem;font-weight:500;text-decoration:none;border:none;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left}
+.mob-item>a:hover,.mob-item>button:hover{background:rgba(255,255,255,.07);color:#fff}
+.mob-item>button svg{width:13px;height:13px;transition:transform .2s;flex-shrink:0}
+.mob-item>button.open svg{transform:rotate(180deg)}
+.mob-sub{display:none;background:rgba(0,0,0,.25)}
+.mob-sub.open{display:block}
+.mob-sub a{display:block;padding:11px 20px 11px 36px;color:rgba(255,255,255,.65);font-size:.88rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:all .15s}
+.mob-sub a:hover{background:rgba(255,255,255,.07);color:#fff;padding-left:42px}
+.mob-sub a:last-child{border-bottom:none}
 @media(max-width:768px){
+  .nav-items{display:none}
+  .hamburger{display:flex}
   .hero-inner{grid-template-columns:1fr}.info-cards{display:none}
   .two-col{grid-template-columns:1fr}.i-grid{grid-template-columns:1fr}
   .tool-grid{grid-template-columns:repeat(2,1fr)}.meta-row{grid-template-columns:1fr}
@@ -182,6 +202,7 @@ footer strong{color:rgba(255,255,255,.82)}
 <!-- NAV -->
 <nav>
   <div class="nav-brand">Mamun <span>Portfolio</span></div>
+  <button class="hamburger" id="hbg" onclick="toggleMob();return false"><span></span><span></span><span></span></button>
   <ul class="nav-items">
     <li><a href="#" onclick="go('home');return false">Home</a></li>
     <li>
@@ -216,6 +237,37 @@ footer strong{color:rgba(255,255,255,.82)}
     <li><a href="#" onclick="go('refs');return false">References</a></li>
   </ul>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobMenu">
+  <div class="mob-item"><a href="#" onclick="go('home');closeMob();return false">Home</a></div>
+  <div class="mob-item">
+    <button onclick="toggleMobSub('ms1',this);return false">Part A — Tools <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></button>
+    <div class="mob-sub" id="ms1">
+      <a href="#" onclick="go('ov');closeMob();return false">Part A Overview</a>
+      <a href="#" onclick="go('t1');closeMob();return false">Tool 1 — GeoGebra</a>
+      <a href="#" onclick="go('t2');closeMob();return false">Tool 2 — Desmos</a>
+      <a href="#" onclick="go('t3');closeMob();return false">Tool 3 — Kahoot!</a>
+      <a href="#" onclick="go('t4');closeMob();return false">Tool 4 — Padlet</a>
+      <a href="#" onclick="go('t5');closeMob();return false">Tool 5 — Nearpod</a>
+      <a href="#" onclick="go('t6');closeMob();return false">Tool 6 — Wolfram Alpha</a>
+      <a href="#" onclick="go('t7');closeMob();return false">Tool 7 — Canva</a>
+      <a href="#" onclick="go('t8');closeMob();return false">Tool 8 — Khan Academy</a>
+      <a href="#" onclick="go('t9');closeMob();return false">Tool 9 — Quizizz</a>
+      <a href="#" onclick="go('t10');closeMob();return false">Tool 10 — Google Classroom</a>
+    </div>
+  </div>
+  <div class="mob-item"><a href="#" onclick="go('ranking');closeMob();return false">Ranking</a></div>
+  <div class="mob-item">
+    <button onclick="toggleMobSub('ms2',this);return false">Part B — Activities <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l4 4 4-4"/></svg></button>
+    <div class="mob-sub" id="ms2">
+      <a href="#" onclick="go('b1');closeMob();return false">GeoGebra Activity</a>
+      <a href="#" onclick="go('b2');closeMob();return false">Desmos Activity</a>
+    </div>
+  </div>
+  <div class="mob-item"><a href="#" onclick="go('conclusion');closeMob();return false">Conclusion</a></div>
+  <div class="mob-item"><a href="#" onclick="go('refs');closeMob();return false">References</a></div>
+</div>
 
 <!-- HOME -->
 <div class="page active" id="home">
@@ -694,6 +746,22 @@ function cd(){
   document.querySelectorAll('.nav-items button').forEach(b=>b.classList.remove('open'));
 }
 document.addEventListener('click',function(e){if(!e.target.closest('.nav-items'))cd();});
+
+function toggleMob(){
+  var m=document.getElementById('mobMenu');
+  var h=document.getElementById('hbg');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+}
+function closeMob(){
+  document.getElementById('mobMenu').classList.remove('open');
+  document.getElementById('hbg').classList.remove('open');
+}
+function toggleMobSub(id,btn){
+  var s=document.getElementById(id);
+  s.classList.toggle('open');
+  btn.classList.toggle('open');
+}
 </script>
 </body>
 </html>
